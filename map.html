@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Map — FoodRescue PH</title>
+    <!-- Tailwind CSS for high contrast, responsive, large touch targets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        foodGreen: '#15803d',
+                        foodLightGreen: '#f0fdf4',
+                        foodOrange: '#ea580c',
+                        foodCream: '#fefae0',
+                        foodDark: '#1c1917'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#fefae0] text-foodDark antialiased min-h-screen flex flex-col">
+
+    <!-- Top Accessibility Bar -->
+    <div class="bg-foodGreen text-white px-4 py-3 text-sm font-bold flex flex-wrap items-center justify-between shadow-sm">
+        <div class="flex items-center space-x-4">
+            <span class="bg-white/20 px-3 py-1 rounded-full text-xs">🇵🇭 FoodRescue PH</span>
+            <button onclick="readAloud('Live food rescue map. See active food donation locations near you.')" class="bg-white/10 hover:bg-white/30 px-3 py-1 rounded-xl transition flex items-center space-x-2 text-base">
+                <i class="fa-solid fa-volume-high"></i>
+                <span>🔊 Read Page</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Simple, Large Navigation Header -->
+    <header class="bg-white sticky top-0 z-50 border-b-4 border-emerald-600 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center text-emerald-700 text-3xl shadow-inner">
+                    🍱
+                </div>
+                <div>
+                    <span class="text-2xl sm:text-3xl font-extrabold tracking-tight text-emerald-800">FoodRescue <span class="text-orange-600">PH</span></span>
+                    <p class="text-xs font-bold text-slate-600">Pagkain Para sa Tao, Hindi Para sa Basura.</p>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden lg:flex items-center space-x-2 font-bold text-base text-slate-700">
+                <a href="index.html" class="px-4 py-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center space-x-2"><span>🏠</span><span>Home</span></a>
+                <a href="find-food.html" class="px-4 py-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center space-x-2"><span>🍱</span><span>Find Food</span></a>
+                <a href="map.html" class="px-4 py-3 rounded-2xl bg-emerald-100 text-emerald-900 shadow-sm flex items-center space-x-2"><span>📍</span><span>Map</span></a>
+                <a href="post-food.html" class="px-4 py-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center space-x-2"><span>🎁</span><span>Post Food</span></a>
+                <a href="impact.html" class="px-4 py-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center space-x-2"><span>📊</span><span>Impact</span></a>
+                <a href="about.html" class="px-4 py-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center space-x-2"><span>ℹ️</span><span>About</span></a>
+                <a href="dashboard.html" class="px-4 py-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center space-x-2"><span>👤</span><span>My Account</span></a>
+            </nav>
+
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-3 rounded-2xl bg-emerald-600 text-white text-xl shadow-md">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t-2 border-slate-100 px-4 py-4 space-y-2 font-bold text-lg">
+            <a href="index.html" class="block p-3 rounded-xl hover:bg-emerald-50">🏠 Home / Simula</a>
+            <a href="find-food.html" class="block p-3 rounded-xl hover:bg-emerald-50">🍱 Find Food / Maghanap ng Pagkain</a>
+            <a href="map.html" class="block p-3 rounded-xl bg-emerald-50 text-emerald-900">📍 Map / Mapa</a>
+            <a href="post-food.html" class="block p-3 rounded-xl hover:bg-emerald-50">🎁 Post Food / Magbahagi ng Pagkain</a>
+            <a href="impact.html" class="block p-3 rounded-xl hover:bg-emerald-50">📊 Impact / Tulong na Naibigay</a>
+            <a href="about.html" class="block p-3 rounded-xl hover:bg-emerald-50">ℹ️ About / Tungkol sa Amin</a>
+            <a href="dashboard.html" class="block p-3 rounded-xl hover:bg-emerald-50">👤 My Account / Aking Account</a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 py-8 w-full">
+        <!-- Page Title & Header -->
+        <div class="text-center mb-8">
+            <div class="inline-block bg-emerald-100 text-emerald-900 font-extrabold px-6 py-2 rounded-full text-base mb-4 border border-emerald-300 shadow-sm">
+                📍 Live Food Map
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-emerald-900 mb-4">
+                Explore Food Donors Near You
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-700 font-medium max-w-2xl mx-auto">
+                View active donation posts and community hubs on the map. Find pickup spots instantly!
+            </p>
+        </div>
+
+        <!-- Map Controls / Filters -->
+        <div class="flex flex-wrap justify-center gap-3 mb-6">
+            <button class="bg-emerald-600 text-white font-extrabold px-6 py-3 rounded-2xl text-base shadow-md flex items-center space-x-2 border-2 border-emerald-500">
+                <span>📍</span><span>All Locations</span>
+            </button>
+            <button class="bg-white hover:bg-emerald-50 text-emerald-900 font-extrabold px-6 py-3 rounded-2xl text-base shadow-md flex items-center space-x-2 border-2 border-emerald-300">
+                <span>🟢</span><span>Free Donations</span>
+            </button>
+            <button class="bg-white hover:bg-emerald-50 text-emerald-900 font-extrabold px-6 py-3 rounded-2xl text-base shadow-md flex items-center space-x-2 border-2 border-emerald-300">
+                <span>💰</span><span>Discounted Food</span>
+            </button>
+        </div>
+
+        <!-- Interactive Map Mockup Container -->
+        <div class="bg-white rounded-3xl shadow-2xl border-4 border-emerald-600 overflow-hidden mb-12 relative">
+            <div class="bg-emerald-800 text-white px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center space-x-3 font-extrabold text-lg">
+                    <span>🗺️</span>
+                    <span>Interactive Neighborhood Map</span>
+                </div>
+                <span class="bg-emerald-600 px-3 py-1 rounded-full text-xs font-bold animate-pulse">● Live Tracking</span>
+            </div>
+
+            <!-- Map View Area -->
+            <div class="h-[450px] sm:h-[550px] bg-slate-100 relative flex items-center justify-center">
+                <!-- Decorative grid lines to simulate map background -->
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#15803d_2px,transparent_2px)] [background-size:24px_24px]"></div>
+
+                <!-- Simulated Map Pins -->
+                <div class="absolute top-1/4 left-1/3 transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+                    <div class="bg-orange-600 text-white font-extrabold px-4 py-2 rounded-2xl shadow-xl border-2 border-white flex items-center space-x-2 animate-bounce">
+                        <span>🍚</span>
+                        <span>Rice Meals (30)</span>
+                    </div>
+                </div>
+
+                <div class="absolute top-1/2 right-1/4 transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+                    <div class="bg-emerald-700 text-white font-extrabold px-4 py-2 rounded-2xl shadow-xl border-2 border-white flex items-center space-x-2">
+                        <span>🍞</span>
+                        <span>Bread Packs (20)</span>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-1/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+                    <div class="bg-emerald-700 text-white font-extrabold px-4 py-2 rounded-2xl shadow-xl border-2 border-white flex items-center space-x-2">
+                        <span>🥗</span>
+                        <span>Fresh Veggies (15)</span>
+                    </div>
+                </div>
+
+                <!-- Center User Pin -->
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                    <div class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl shadow-2xl border-4 border-white mx-auto animate-pulse">
+                        📍
+                    </div>
+                    <span class="bg-white px-3 py-1 rounded-full text-xs font-extrabold text-blue-900 shadow-md mt-1 inline-block">You Are Here</span>
+                </div>
+            </div>
+
+            <!-- Map Footer Info -->
+            <div class="bg-emerald-50 px-6 py-4 border-t-2 border-emerald-100 flex flex-col sm:flex-row items-center justify-between text-slate-700 font-bold text-sm">
+                <span>💡 Click any pin on the map to view direct pickup details and directions.</span>
+                <a href="find-food.html" class="mt-2 sm:mt-0 text-emerald-800 hover:underline flex items-center space-x-1">
+                    <span>Switch to List View</span>
+                    <span>→</span>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-foodDark text-white py-12 px-4 mt-auto border-t-4 border-emerald-600">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-base">
+            <div>
+                <div class="flex items-center space-x-3 mb-4">
+                    <span class="text-3xl">🍱</span>
+                    <span class="text-2xl font-extrabold">FoodRescue <span class="text-orange-500">PH</span></span>
+                </div>
+                <p class="text-slate-300 font-medium leading-relaxed">
+                    “Pagkain Para sa Tao, Hindi Para sa Basura.” Connecting extra food with people who need it across the Philippines.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-extrabold text-lg text-emerald-400 mb-3">Quick Links</h4>
+                <ul class="space-y-2 font-medium">
+                    <li><a href="find-food.html" class="hover:text-emerald-300">🍱 Find Food</a></li>
+                    <li><a href="post-food.html" class="hover:text-emerald-300">🎁 Post Extra Food</a></li>
+                    <li><a href="map.html" class="hover:text-emerald-300">📍 See Food Map</a></li>
+                    <li><a href="impact.html" class="hover:text-emerald-300">📊 Community Impact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-extrabold text-lg text-emerald-400 mb-3">Learn More</h4>
+                <ul class="space-y-2 font-medium">
+                    <li><a href="about.html" class="hover:text-emerald-300">ℹ️ About Us</a></li>
+                    <li><a href="safety.html" class="hover:text-emerald-300">🛡️ Food Safety Guidelines</a></li>
+                    <li><a href="login.html" class="hover:text-emerald-300">🔐 Log In</a></li>
+                    <li><a href="register.html" class="hover:text-emerald-300">📝 Create Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-extrabold text-lg text-emerald-400 mb-3">🇵🇭 Community Hub</h4>
+                <p class="text-slate-300 font-medium mb-3">No technical knowledge required. Simple, fast, and welcoming for everyone.</p>
+                <div class="bg-emerald-900/60 p-3 rounded-xl border border-emerald-700 text-emerald-200 font-bold text-sm">
+                    ✅ Safe & Trusted Sharing
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-8 border-t border-slate-800 text-center text-sm text-slate-400 font-bold">
+            &copy; 2026 FoodRescue PH. All rights reserved. Save Food. Share Hope.
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function readAloud(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert(text);
+            }
+        }
+    </script>
+</body>
+</html>
