@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodRescue PH — Save Food. Share Hope.</title>
+    <!-- Tailwind CSS for high contrast, responsive, large touch targets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        foodGreen: '#15803d',
+                        foodLightGreen: '#f0fdf4',
+                        foodOrange: '#ea580c',
+                        foodCream: '#fefae0',
+                        foodDark: '#1c1917'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#fefae0] text-foodDark antialiased min-h-screen flex flex-col">
+
+    <!-- Top Accessibility & Language Bar -->
+    <div class="bg-foodGreen text-white px-4 py-3 text-sm font-bold flex flex-wrap items-center justify-between shadow-sm">
+        <div class="flex items-center space-x-4">
+            <span class="bg-white/20 px-3 py-1 rounded-full text-xs">🇵🇭 FoodRescue PH</span>
+            <button onclick="readAloud('Welcome to FoodRescue PH. Save Food. Share Hope.')" class="bg-white/10 hover:bg-white/30 px-3 py-1 rounded-xl transition flex items-center space-x-2 text-base">
+                <i class="fa-solid fa-volume-high"></i>
+                <span>🔊 Read Page</span>
+            </button>
+        </div>
+        <div class="flex items-center space-x-3 mt-2 sm:mt-0">
+        </div>
+    </div>
+
+    <!-- Simple, Large Navigation Header -->
+    <header class="bg-white sticky top-0 z-50 border-b-4 border-emerald-600 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center text-emerald-700 text-3xl shadow-inner">
+                    🍱
+                </div>
+                <div>
+                    <span class="text-2xl sm:text-3xl font-extrabold tracking-tight text-emerald-800">FoodRescue <span class="text-orange-600">PH</span></span>
+                    <p class="text-xs font-bold text-slate-600">Pagkain Para sa Tao, Hindi Para sa Basura.</p>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden lg:flex items-center space-x-2 font-bold text-base text-slate-700">
+                <a href="index.html" class="px-4 py-3 rounded-2xl bg-emerald-100 text-emerald-900 shadow-sm flex items-center space-x-2"><span>🏠</span><span>Home</span></a>
+                <a href="find-food.html" class="px-4 py-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center space-x-2"><span>🍱</span><span>Find Food</span></a>
+                <a href="map.html" class="px-4 py-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center space-x-2"><span>📍</span><span>Map</span></a>
+                <a href="post-food.html" class="px-4 py-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center space-x-2"><span>🎁</span><span>Post Food</span></a>
+                <a href="impact.html" class="px-4 py-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center space-x-2"><span>📊</span><span>Impact</span></a>
+                <a href="about.html" class="px-4 py-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center space-x-2"><span>ℹ️</span><span>About</span></a>
+                <a href="dashboard.html" class="px-4 py-3 rounded-2xl hover:bg-emerald-50 hover:text-emerald-800 transition flex items-center space-x-2"><span>👤</span><span>My Account</span></a>
+            </nav>
+
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-3 rounded-2xl bg-emerald-600 text-white text-xl shadow-md">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t-2 border-slate-100 px-4 py-4 space-y-2 font-bold text-lg">
+            <a href="index.html" class="block p-3 rounded-xl bg-emerald-50 text-emerald-900">🏠 Home / Simula</a>
+            <a href="find-food.html" class="block p-3 rounded-xl hover:bg-emerald-50">🍱 Find Food / Maghanap ng Pagkain</a>
+            <a href="map.html" class="block p-3 rounded-xl hover:bg-emerald-50">📍 Map / Mapa</a>
+            <a href="post-food.html" class="block p-3 rounded-xl hover:bg-emerald-50">🎁 Post Food / Magbahagi ng Pagkain</a>
+            <a href="impact.html" class="block p-3 rounded-xl hover:bg-emerald-50">📊 Impact / Tulong na Naibigay</a>
+            <a href="about.html" class="block p-3 rounded-xl hover:bg-emerald-50">ℹ️ About / Tungkol sa Amin</a>
+            <a href="dashboard.html" class="block p-3 rounded-xl hover:bg-emerald-50">👤 My Account / Aking Account</a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section class="py-12 sm:py-20 px-4 max-w-6xl mx-auto text-center">
+            <div class="inline-block bg-orange-100 text-orange-800 font-extrabold px-6 py-2.5 rounded-full text-base sm:text-lg mb-6 shadow-sm border border-orange-200">
+                ❤️ “Pagkain Para sa Tao, Hindi Para sa Basura.”
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-extrabold text-emerald-900 tracking-tight mb-6 leading-tight">
+                SAVE FOOD. HELP PEOPLE.
+            </h1>
+            <p class="text-xl sm:text-2xl text-slate-700 max-w-3xl mx-auto mb-12 font-medium leading-relaxed">
+                Do you have extra food? Share it with someone who can use it. No technical knowledge required!
+            </p>
+
+            <!-- Large Action Buttons Grid (5-Second Test compliant) -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
+                <a href="find-food.html" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold p-8 rounded-3xl shadow-xl transition transform hover:-translate-y-1 flex flex-col items-center justify-center space-y-3 text-center border-4 border-emerald-500">
+                    <span class="text-5xl">🍱</span>
+                    <span class="text-2xl">FIND FOOD</span>
+                    <span class="text-sm font-semibold opacity-90">Maghanap ng Pagkain</span>
+                </a>
+
+                <a href="post-food.html" class="bg-orange-600 hover:bg-orange-700 text-white font-extrabold p-8 rounded-3xl shadow-xl transition transform hover:-translate-y-1 flex flex-col items-center justify-center space-y-3 text-center border-4 border-orange-500">
+                    <span class="text-5xl">🎁</span>
+                    <span class="text-2xl">POST EXTRA FOOD</span>
+                    <span class="text-sm font-semibold opacity-90">Magbahagi ng Pagkain</span>
+                </a>
+
+                <a href="find-food.html" class="bg-white hover:bg-slate-50 text-emerald-900 font-extrabold p-8 rounded-3xl shadow-xl transition transform hover:-translate-y-1 flex flex-col items-center justify-center space-y-3 text-center border-4 border-emerald-600">
+                    <span class="text-5xl">📍</span>
+                    <span class="text-2xl">SEE FOOD NEAR ME</span>
+                    <span class="text-sm font-semibold text-slate-600">Pagkain sa Malapit</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- How It Works Section (4 Simple Steps) -->
+        <section class="bg-white py-16 px-4 border-t-4 border-emerald-100">
+            <div class="max-w-5xl mx-auto text-center">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-emerald-900 mb-4">HOW IT WORKS</h2>
+                <p class="text-lg text-slate-600 mb-12 font-medium">Sharing food is as easy as 1, 2, 3, 4!</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-8">
+                    <!-- Step 1 -->
+                    <div class="bg-emerald-50 p-6 rounded-3xl border-2 border-emerald-200 flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-emerald-600 text-white rounded-2xl flex items-center justify-center text-3xl font-extrabold mb-4 shadow">1️⃣</div>
+                        <h3 class="text-xl font-bold text-emerald-900 mb-2">POST</h3>
+                        <p class="text-slate-700 text-base font-medium">Someone has extra food and lists it online.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="bg-emerald-50 p-6 rounded-3xl border-2 border-emerald-200 flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-emerald-600 text-white rounded-2xl flex items-center justify-center text-3xl font-extrabold mb-4 shadow">2️⃣</div>
+                        <h3 class="text-xl font-bold text-emerald-900 mb-2">FIND</h3>
+                        <p class="text-slate-700 text-base font-medium">Someone nearby sees the available food.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="bg-emerald-50 p-6 rounded-3xl border-2 border-emerald-200 flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-emerald-600 text-white rounded-2xl flex items-center justify-center text-3xl font-extrabold mb-4 shadow">3️⃣</div>
+                        <h3 class="text-xl font-bold text-emerald-900 mb-2">ASK</h3>
+                        <p class="text-slate-700 text-base font-medium">They send a quick request to get the food.</p>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="bg-emerald-50 p-6 rounded-3xl border-2 border-emerald-200 flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-emerald-600 text-white rounded-2xl flex items-center justify-center text-3xl font-extrabold mb-4 shadow">4️⃣</div>
+                        <h3 class="text-xl font-bold text-emerald-900 mb-2">SHARE</h3>
+                        <p class="text-slate-700 text-base font-medium">The food is collected and shared happily!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Impact Counter Section -->
+        <section class="py-16 px-4 max-w-5xl mx-auto text-center">
+            <div class="bg-gradient-to-r from-emerald-800 to-emerald-900 text-white rounded-3xl p-8 sm:p-12 shadow-2xl">
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Our Community Impact</h2>
+                <p class="text-lg text-emerald-200 mb-8 font-medium">Together, we are making sure good food feeds people instead of landfills.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div class="bg-white/10 p-6 rounded-2xl backdrop-blur-sm border border-white/20">
+                        <div class="text-4xl sm:text-5xl font-extrabold text-orange-400 mb-2">12,450</div>
+                        <div class="text-lg font-bold">Meals Saved</div>
+                    </div>
+                    <div class="bg-white/10 p-6 rounded-2xl backdrop-blur-sm border border-white/20">
+                        <div class="text-4xl sm:text-5xl font-extrabold text-orange-400 mb-2">1,284</div>
+                        <div class="text-lg font-bold">Rescues Completed</div>
+                    </div>
+                    <div class="bg-white/10 p-6 rounded-2xl backdrop-blur-sm border border-white/20">
+                        <div class="text-4xl sm:text-5xl font-extrabold text-orange-400 mb-2">3,420</div>
+                        <div class="text-lg font-bold">People Helped</div>
+                    </div>
+                </div>
+                <div class="mt-8">
+                    <a href="impact.html" class="inline-block bg-orange-600 hover:bg-orange-700 text-white font-extrabold px-8 py-4 rounded-2xl text-lg shadow-lg transition">
+                        📊 View Full Impact Details ➔
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Help Floating Button & Footer -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button onclick="openHelpModal()" class="bg-orange-600 hover:bg-orange-700 text-white font-extrabold px-6 py-4 rounded-full shadow-2xl flex items-center space-x-3 text-lg border-4 border-white animate-bounce">
+            <span>❓</span>
+            <span>NEED HELP?</span>
+        </button>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative border-4 border-emerald-600">
+            <button onclick="closeHelpModal()" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold w-10 h-10 rounded-full text-xl flex items-center justify-center">✕</button>
+            <h3 class="text-2xl font-extrabold text-emerald-900 mb-4 flex items-center space-x-2">
+                <span>💡</span>
+                <span>Quick Help Guide</span>
+            </h3>
+            <div class="space-y-4 text-base text-slate-700 font-medium">
+                <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
+                    <strong class="text-emerald-900 block mb-1">What does “Available” mean?</strong>
+                    It means the food is still fresh and ready to be requested right now!
+                </div>
+                <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
+                    <strong class="text-emerald-900 block mb-1">How do I ask for food?</strong>
+                    Click on any food card or map marker, then click the large "Ask for Food" button.
+                </div>
+                <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200">
+                    <strong class="text-emerald-900 block mb-1">Is it safe?</strong>
+                    All providers follow strict food safety guidelines. Check out our <a href="safety.html" class="text-emerald-700 underline font-bold">Food Safety page</a> for details.
+                </div>
+            </div>
+            <div class="mt-6">
+                <button onclick="closeHelpModal()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3.5 rounded-2xl text-lg shadow">Got It, Thanks!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-foodDark text-white py-12 px-4 mt-auto border-t-4 border-emerald-600">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-base">
+            <div>
+                <div class="flex items-center space-x-3 mb-4">
+                    <span class="text-3xl">🍱</span>
+                    <span class="text-2xl font-extrabold">FoodRescue <span class="text-orange-500">PH</span></span>
+                </div>
+                <p class="text-slate-300 font-medium leading-relaxed">
+                    “Pagkain Para sa Tao, Hindi Para sa Basura.” Connecting extra food with people who need it across the Philippines.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-extrabold text-lg text-emerald-400 mb-3">Quick Links</h4>
+                <ul class="space-y-2 font-medium">
+                    <li><a href="find-food.html" class="hover:text-emerald-300">🍱 Find Food</a></li>
+                    <li><a href="post-food.html" class="hover:text-emerald-300">🎁 Post Extra Food</a></li>
+                    <li><a href="map.html" class="hover:text-emerald-300">📍 See Food Map</a></li>
+                    <li><a href="impact.html" class="hover:text-emerald-300">📊 Community Impact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-extrabold text-lg text-emerald-400 mb-3">Learn More</h4>
+                <ul class="space-y-2 font-medium">
+                    <li><a href="about.html" class="hover:text-emerald-300">ℹ️ About Us</a></li>
+                    <li><a href="safety.html" class="hover:text-emerald-300">🛡️ Food Safety Guidelines</a></li>
+                    <li><a href="login.html" class="hover:text-emerald-300">🔐 Log In</a></li>
+                    <li><a href="register.html" class="hover:text-emerald-300">📝 Create Account</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-extrabold text-lg text-emerald-400 mb-3">🇵🇭 Community Hub</h4>
+                <p class="text-slate-300 font-medium mb-3">No technical knowledge required. Simple, fast, and welcoming for everyone.</p>
+                <div class="bg-emerald-900/60 p-3 rounded-xl border border-emerald-700 text-emerald-200 font-bold text-sm">
+                    ✅ Safe & Trusted Sharing
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-8 border-t border-slate-800 text-center text-sm text-slate-400 font-bold">
+            &copy; 2026 FoodRescue PH. All rights reserved. Save Food. Share Hope.
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function openHelpModal() {
+            document.getElementById('help-modal').classList.remove('hidden');
+        }
+
+        function closeHelpModal() {
+            document.getElementById('help-modal').classList.add('hidden');
+        }
+
+        function readAloud(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert(text);
+            }
+        }
+    </script>
+</body>
+</html>
