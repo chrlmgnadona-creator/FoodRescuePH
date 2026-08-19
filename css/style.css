@@ -1,0 +1,67 @@
+/* =================================================================xture
+   FoodRescue PH - Main Stylesheet (style.css)
+   Theme: High Contrast, Accessible, Large Touch Targets, Warm Community Feel
+   ==================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap');
+
+/* --- Root Variables & Theme Colors --- */
+:root {
+    --food-green: #15803d;
+    --food-light-green: #f0fdf4;
+    --food-orange: #ea580c;
+    --food-cream: #fefae0;
+    --food-dark: #1c1917;
+    --food-white: #ffffff;
+}
+
+/* --- Base Reset & Typography --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--food-cream);
+    color: var(--food-dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Accessibility & Focus States --- */
+button, a, input, select, textarea {
+    touch-action: manipulation;
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible {
+    outline: 4px solid var(--food-orange);
+    outline-offset: 2px;
+}
+
+/* --- Utility Enhancements & Custom Components --- */
+.card-shadow {
+    box-shadow: 0 10px 25px -5px rgba(28, 25, 23, 0.1), 0 8px 10px -6px rgba(28, 25, 23, 0.1);
+}
+
+/* Custom Scrollbar for Accessibility & Clean UI */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--food-cream);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--food-green);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #166534;
+}
