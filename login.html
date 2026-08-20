@@ -177,21 +177,38 @@
         </div>
     </footer>
 
-    <!-- JavaScript Interactions -->
+  <!-- JavaScript Interactions -->
     <script>
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         }
 
-        function handleLogin(event) {
+        async function handleLogin(event) {
             event.preventDefault();
-            // Store a dummy name or flag indicating login if not already registered
-            if (!localStorage.getItem('foodRescueUserName')) {
-                localStorage.setItem('foodRescueUserName', 'Barangay Member');
+            const mobile = document.getElementById('mobile').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('http://localhost:3001/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mobile, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('foodRescueUserName', data.user.fullname || 'Barangay Member');
+                    alert('Login successful! Redirecting to your dashboard.');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert(data.message || 'Login failed. Please check your credentials.');
+                }
+            } catch (error) {
+                console.error('Error connecting to backend:', error);
+                alert('Could not connect to the server. Make sure your Node.js backend is running on port 3001.');
             }
-            alert('Login successful! Redirecting to your dashboard.');
-            window.location.href = 'dashboard.html';
         }
 
         function readAloud(text) {
