@@ -193,20 +193,40 @@
         </div>
     </footer>
 
-    <!-- JavaScript Interactions -->
+<!-- JavaScript Interactions -->
     <script>
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         }
 
-        function handleRegister(event) {
+        async function handleRegister(event) {
             event.preventDefault();
-            const name = document.getElementById('fullname').value;
-            // Store user name in localStorage so dashboard can display it after sign up
-            localStorage.setItem('foodRescueUserName', name);
-            alert('Account created successfully! Redirecting to your dashboard.');
-            window.location.href = 'dashboard.html';
+            const fullname = document.getElementById('fullname').value;
+            const mobile = document.getElementById('mobile').value;
+            const barangay = document.getElementById('barangay').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('https://supreme-invention-77vx9wx75vp74j.github.dev/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fullname, mobile, barangay, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('foodRescueUserName', fullname);
+                    alert('Account created successfully! Redirecting to your dashboard.');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert(data.message || 'Registration failed. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error connecting to backend:', error);
+                alert('Could not connect to the server. Make sure your Node.js backend is running on port 3001.');
+            }
         }
 
         function readAloud(text) {
